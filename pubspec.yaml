@@ -1,6 +1,6 @@
 name: fajax
 description: A plugin for web to hit api with help of ajax and php without CORS issue in server side on release build.
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/bikram0000/fajax
 repository: https://github.com/bikram0000/fajax
 

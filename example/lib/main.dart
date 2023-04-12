@@ -28,47 +28,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    late http.Response response;
-    if (kIsWeb && kReleaseMode) {
-      try {
-        await Fajax().makeRequest(
-            fajaxModel: FajaxModel(
-              baseUrl: "https://geolocation-db.com/json",
-              body: {},
-              params: {},
-              headers: {},
-              method: "GET",
-            ),
-            onSuccess: (fajaxResult) {
-              try {
-                response = http.Response(
-                  fajaxResult.response.toString(),
-                  fajaxResult.info['http_code'],
-                );
-              } catch (e) {
-                print("error on json decode $e :: end of error");
-              }
-            },
-            onError: (p0) {
-              print("error on get $p0");
-              response = http.Response(
-                "Something went wrong !!",
-                404,
-              );
-            });
-      } catch (e) {
-        print("Error on getting data from fajax :: $e lllll ");
-        response = http.Response(
-          "Something went wrong !!",
-          -1,
-        );
-      }
-    }
-    else {
-      response = await http
-          .get(Uri.parse("https://geolocation-db.com/json"), headers: {});
-      log('RESPONSE : ${response.statusCode}\n :: $url  || ${response.body}');
-    }
+
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.

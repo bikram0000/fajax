@@ -1,6 +1,6 @@
 # Fajax
 
-2022 © Bikramaditya Meher
+2023 © Bikramaditya Meher
 
 [![Pub](https://img.shields.io/pub/v/fajax.svg)](https://pub.dartlang.org/packages/fajax) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/bikram0000/fajax/blob/main/LICENSE)
 

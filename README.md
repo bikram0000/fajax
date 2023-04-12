@@ -1,15 +1,69 @@
-# fajax
+# Fajax
 
-A plugin for web to hit api with help of ajax and php without cors issue in server side.
+2022 © Bikramaditya Meher
 
-## Getting Started
+[![Pub](https://img.shields.io/pub/v/fajax.svg)](https://pub.dartlang.org/packages/fajax) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/bikram0000/fajax/blob/main/LICENSE)
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+A plugin for web to hit apis with help of ajax and php without CORS issue in server side on release build.Note it will only work on release build.
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
+Add this to your pubspec.yaml file.
+```yaml
+fajax: ^1.0.0
+```
+
+To use Fajax you need to call below code in your State<MyApp> because first time it will import js file to index.html
+```dart
+  final _fajaxPlugin = Fajax();
+```
+
+To make a request
+```dart
+late http.Response response;
+if (kIsWeb && kReleaseMode) {
+try {
+await Fajax().makeRequest(
+fajaxModel: FajaxModel(
+baseUrl: "https://geolocation-db.com/json",
+body: {},
+params: {},
+headers: {},
+method: "GET",
+),
+onSuccess: (fajaxResult) {
+try {
+response = http.Response(
+fajaxResult.response.toString(),
+fajaxResult.info['http_code'],
+);
+}catch(e){
+print("error on json decode $e :: end of error");
+}
+},
+onError: (p0) {
+print("error on get $p0");
+response = http.Response(
+"Something went wrong !!",
+404,
+);
+});
+} catch (e) {
+print("Error on getting data from fajax :: $e lllll ");
+response = http.Response(
+"Something went wrong !!",
+-1,
+);
+}
+}
+else
+{
+response = await http.get(Uri.parse("https://geolocation-db.com/json"),
+headers:{});
+log(
+'RESPONSE : ${response.statusCode}\n :: $url  || ${response
+    .body}');
+
+}
+```
+
+for more information and please checkout example folder.
